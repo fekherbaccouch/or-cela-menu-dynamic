@@ -59,12 +59,6 @@ export default function MenuItemCard({ item, globalIndex, onClick }) {
             group-hover:text-primary-blue transition-colors duration-200">
             {item.name}
           </h3>
-          {item.price && (
-            <span className="shrink-0 font-serif font-bold text-primary-blue text-base leading-tight">
-              {item.price}
-              <span className="font-sans text-[9px] text-warm-gray ml-0.5 font-normal">DT</span>
-            </span>
-          )}
         </div>
 
         <p className="font-sans text-[11px] text-warm-gray leading-relaxed line-clamp-2 mb-4">
