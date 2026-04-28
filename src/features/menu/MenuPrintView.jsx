@@ -1,7 +1,6 @@
 import { Beer, GlassWater, Wine, UtensilsCrossed, Leaf } from 'lucide-react'
 import { OrCelaLogoTile } from '../../components/ui/OrCelaLogo'
 import { menuItems, SUBCATS } from '../../data/menuData'
-import OrnateBorder from '../../components/ui/OrnateBorder'
 
 
 /* ─────────────────────────────────────────────────────── */
@@ -94,10 +93,12 @@ export default function MenuPrintView({ onSelectItem }) {
   const tapasChunk = [tapas.slice(0, 4), tapas.slice(4, 8), tapas.slice(8)]
 
   return (
-    <OrnateBorder>
+    <div className="relative w-full p-5 md:p-10"
+      style={{ backgroundImage: "url('/chart.png')", backgroundSize: '80px 80px', backgroundRepeat: 'repeat' }}
+    >
       {/* Inner cream document */}
       <div
-        className="bg-[#FAF9F6] max-w-5xl mx-auto px-6 sm:px-10 md:px-16 py-12 md:py-16"
+        className="relative z-10 bg-[#FAF9F6] max-w-5xl mx-auto px-6 sm:px-10 md:px-16 py-12 md:py-16"
         style={{ boxShadow: 'inset 0 0 0 1px rgba(212,157,53,0.35), 0 4px 40px rgba(0,19,86,0.12)' }}
       >
 
@@ -183,6 +184,6 @@ export default function MenuPrintView({ onSelectItem }) {
         </div>
 
       </div>
-    </OrnateBorder>
+    </div>
   )
 }
