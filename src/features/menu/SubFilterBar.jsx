@@ -20,7 +20,18 @@ function Chip({ label, active, gold, onClick }) {
 }
 
 function Sep() {
-  return <div className="w-px self-stretch bg-primary-blue/8 mx-1 shrink-0" />
+  return <div className="w-px self-stretch bg-primary-blue/10 mx-1 shrink-0" />
+}
+
+function Group({ label, children }) {
+  return (
+    <div className="flex items-center gap-1 px-3 shrink-0">
+      <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-warm-gray/40 mr-1">
+        {label}
+      </span>
+      {children}
+    </div>
+  )
 }
 
 export default function SubFilterBar({
@@ -30,66 +41,55 @@ export default function SubFilterBar({
   const hasActive = subcat !== 'All' || origin !== 'All' || diet !== 'All' || featured
 
   return (
-    <div className="bg-white shadow-sm overflow-hidden">
-      <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex items-center min-w-max py-2.5">
+    <div className="bg-white border-b border-primary-blue/8 overflow-x-auto scrollbar-hide">
+      <div className="flex items-center min-w-max py-2 px-4 mx-auto">
 
-          {subcats.length > 0 && (
-            <>
-              <div className="flex items-center gap-1 px-4">
-                <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-warm-gray/40 mr-1 shrink-0">
-                  Type
-                </span>
-                <Chip label="Tous" active={subcat === 'All'} onClick={() => onSubcat('All')} />
-                {subcats.map(s => (
-                  <Chip key={s} label={s} active={subcat === s} onClick={() => onSubcat(s)} />
-                ))}
-              </div>
-              <Sep />
-            </>
-          )}
+        {subcats.length > 0 && (
+          <>
+            <Group label="Type">
+              <Chip label="Tous" active={subcat === 'All'} onClick={() => onSubcat('All')} />
+              {subcats.map(s => (
+                <Chip key={s} label={s} active={subcat === s} onClick={() => onSubcat(s)} />
+              ))}
+            </Group>
+            <Sep />
+          </>
+        )}
 
-          <div className="flex items-center gap-1 px-4">
-            <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-warm-gray/40 mr-1 shrink-0">
-              Origine
-            </span>
-            <Chip label="Tous" active={origin === 'All'} onClick={() => onOrigin('All')} />
-            {ORIGINS.map(o => (
-              <Chip key={o} label={o} active={origin === o} onClick={() => onOrigin(o)} />
-            ))}
-          </div>
+        <Group label="Origine">
+          <Chip label="Tous" active={origin === 'All'} onClick={() => onOrigin('All')} />
+          {ORIGINS.map(o => (
+            <Chip key={o} label={o} active={origin === o} onClick={() => onOrigin(o)} />
+          ))}
+        </Group>
 
-          <Sep />
+        <Sep />
 
-          <div className="flex items-center gap-1 px-4">
-            <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-warm-gray/40 mr-1 shrink-0">
-              Régime
-            </span>
-            <Chip label="Tous" gold active={diet === 'All'} onClick={() => onDiet('All')} />
-            {DIETS.map(d => (
-              <Chip key={d} label={d} gold active={diet === d} onClick={() => onDiet(d)} />
-            ))}
-          </div>
+        <Group label="Régime">
+          <Chip label="Tous" gold active={diet === 'All'} onClick={() => onDiet('All')} />
+          {DIETS.map(d => (
+            <Chip key={d} label={d} gold active={diet === d} onClick={() => onDiet(d)} />
+          ))}
+        </Group>
 
-          <Sep />
+        <Sep />
 
-          <div className="px-4">
-            <Chip label="⭑ Chef's Pick" gold active={featured} onClick={() => onFeatured(!featured)} />
-          </div>
-
-          {hasActive && (
-            <>
-              <Sep />
-              <button
-                onClick={() => { onSubcat('All'); onOrigin('All'); onDiet('All'); onFeatured(false) }}
-                className="px-4 font-sans text-[9px] tracking-[0.12em] uppercase
-                  text-warm-gray/50 hover:text-ink transition-colors whitespace-nowrap"
-              >
-                × Effacer
-              </button>
-            </>
-          )}
+        <div className="px-3 shrink-0">
+          <Chip label="⭑ Chef's Pick" gold active={featured} onClick={() => onFeatured(!featured)} />
         </div>
+
+        {hasActive && (
+          <>
+            <Sep />
+            <button
+              onClick={() => { onSubcat('All'); onOrigin('All'); onDiet('All'); onFeatured(false) }}
+              className="px-4 font-sans text-[9px] tracking-[0.12em] uppercase
+                text-warm-gray/50 hover:text-ink transition-colors whitespace-nowrap shrink-0"
+            >
+              × Effacer
+            </button>
+          </>
+        )}
       </div>
     </div>
   )

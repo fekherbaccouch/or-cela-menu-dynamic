@@ -71,10 +71,8 @@ export default function MenuPage({ searchQuery = '' }) {
       </div>
 
       {/* ── Sticky filter bar — sits below the fixed navbar (top-16) ── */}
-      <div className="sticky top-16 z-30 bg-cream-paper shadow-md">
-        <div className="max-w-7xl mx-auto">
-          <FilterBar active={category} onChange={handleCategory} />
-        </div>
+      <div className="sticky top-16 z-30 bg-cream-paper shadow-sm">
+        <FilterBar active={category} onChange={handleCategory} />
         <motion.div key={category} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
           <SubFilterBar
             category={category}
