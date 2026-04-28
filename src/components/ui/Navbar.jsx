@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Search } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { OrCelaLogoTile } from './OrCelaLogo'
 
 const NAV_LINKS = [
@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: 'Événements',    href: '#events'  },
 ]
 
-export default function Navbar({ searchQuery, onSearch }) {
+export default function Navbar() {
   const [open,     setOpen]     = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -43,46 +43,21 @@ export default function Navbar({ searchQuery, onSearch }) {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-7">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <a href={href}
-                  className={`font-sans text-[10px] font-semibold tracking-[0.2em] uppercase
-                    relative pb-0.5 transition-colors duration-200 group
-                    ${scrolled ? 'text-primary-blue' : 'text-cream-paper/80 hover:text-cream-paper'}`}
-                >
-                  {label}
-                  <span className="absolute inset-x-0 bottom-0 h-px bg-gold-accent scale-x-0
-                    group-hover:scale-x-100 transition-transform duration-200 origin-left" />
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* Search — no border, subtle bg fill */}
-          <div className={`flex items-center gap-2 px-3 py-1.5 transition-all duration-300
-            ${scrolled ? 'bg-primary-blue/8' : 'bg-white/15'}`}>
-            <Search size={12} strokeWidth={2} className={scrolled ? 'text-warm-gray' : 'text-cream-paper/60'} />
-            <input
-              type="search"
-              placeholder="Rechercher…"
-              value={searchQuery}
-              onChange={e => onSearch(e.target.value)}
-              className={`bg-transparent font-sans text-[11px] focus:outline-none w-28
-                ${scrolled
-                  ? 'text-ink placeholder:text-warm-gray/50'
-                  : 'text-cream-paper placeholder:text-cream-paper/40'}`}
-            />
-          </div>
-
-          <a href="#contact"
-            className="px-5 py-2 bg-gold-accent font-sans text-[10px] font-bold
-              tracking-[0.2em] uppercase text-primary-blue
-              hover:bg-gold-light transition-colors shadow-sm whitespace-nowrap">
-            Réservation
-          </a>
-        </div>
+        <ul className="hidden md:flex items-center gap-7">
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={href}>
+              <a href={href}
+                className={`font-sans text-[10px] font-semibold tracking-[0.2em] uppercase
+                  relative pb-0.5 transition-colors duration-200 group
+                  ${scrolled ? 'text-primary-blue' : 'text-cream-paper/80 hover:text-cream-paper'}`}
+              >
+                {label}
+                <span className="absolute inset-x-0 bottom-0 h-px bg-gold-accent scale-x-0
+                  group-hover:scale-x-100 transition-transform duration-200 origin-left" />
+              </a>
+            </li>
+          ))}
+        </ul>
 
         {/* Mobile hamburger */}
         <button
@@ -95,24 +70,10 @@ export default function Navbar({ searchQuery, onSearch }) {
         </button>
       </div>
 
-      {/* Mobile drawer — no borders */}
+      {/* Mobile drawer */}
       {open && (
         <div className="md:hidden bg-cream-paper shadow-xl">
-          <div className="px-5 pt-4 pb-3">
-            <div className="flex items-center gap-2 bg-primary-blue/8 px-3 py-2.5">
-              <Search size={13} className="text-warm-gray shrink-0" />
-              <input
-                type="search"
-                placeholder="Rechercher dans le menu…"
-                value={searchQuery}
-                onChange={e => onSearch(e.target.value)}
-                className="bg-transparent font-sans text-[12px] text-ink
-                  placeholder:text-warm-gray/50 focus:outline-none w-full"
-              />
-            </div>
-          </div>
-
-          <ul className="px-5 pb-2">
+          <ul className="px-5 py-4">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
@@ -126,17 +87,6 @@ export default function Navbar({ searchQuery, onSearch }) {
               </li>
             ))}
           </ul>
-
-          <div className="px-5 pb-5">
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="block text-center py-3.5 bg-primary-blue font-sans text-[11px]
-                font-bold tracking-[0.2em] uppercase text-cream-paper hover:bg-deep-blue transition-colors"
-            >
-              Réservation
-            </a>
-          </div>
         </div>
       )}
     </nav>

@@ -97,9 +97,9 @@ export default function Footer() {
           <div>
             <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-gold-accent mb-5">Navigation</p>
             <ul className="space-y-3">
-              {['Menu', 'Notre Univers', 'Galerie', 'Événements', 'Réservation'].map(item => (
+              {['Menu', 'Notre Univers', 'Galerie', 'Événements'].map(item => (
                 <li key={item}>
-                  <a href={`#${item === 'Notre Univers' ? 'univers' : item === 'Réservation' ? 'contact' : item.toLowerCase()}`}
+                  <a href={`#${item === 'Notre Univers' ? 'univers' : item.toLowerCase()}`}
                     className="font-sans text-[12px] text-cream-paper/50 hover:text-gold-accent
                       transition-colors tracking-wide">
                     {item}
