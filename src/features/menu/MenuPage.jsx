@@ -5,6 +5,7 @@ import FilterBar    from './FilterBar'
 import SubFilterBar from './SubFilterBar'
 import MenuGrid     from './MenuGrid'
 import ItemModal    from '../../components/ui/ItemModal'
+import OrnateBorder from '../../components/ui/OrnateBorder'
 
 export default function MenuPage({ searchQuery = '' }) {
   const [category, setCategory] = useState('Cuisine')
@@ -85,21 +86,18 @@ export default function MenuPage({ searchQuery = '' }) {
       </div>
 
       {/* ── Grid ── */}
-      <div className="bg-cream-paper">
+      <OrnateBorder>
         <div className="max-w-7xl mx-auto px-6 md:px-10 pt-8 pb-4">
           <p className="font-sans text-[11px] text-warm-gray">
             <span className="font-bold text-primary-blue text-base">{filtered.length}</span>
             {' '}article{filtered.length !== 1 ? 's' : ''}
-            {searchQuery && (
-              <span className="text-gold-accent ml-2">— «&nbsp;{searchQuery}&nbsp;»</span>
-            )}
           </p>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-10 pb-14">
           <MenuGrid items={filtered} onSelectItem={setSelected} />
         </div>
-      </div>
+      </OrnateBorder>
 
       {selected && <ItemModal item={selected} onClose={() => setSelected(null)} />}
     </section>
